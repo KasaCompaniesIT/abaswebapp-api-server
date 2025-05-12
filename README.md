@@ -37,9 +37,13 @@ abaswebapp-api-server
 1. Run the Flask application:
    ```
    python app.py
+
+   or 
+
+   gunicorn -w 4 -b 0.0.0.0:8000 app:app
    ```
 
-gunicorn -w 4 -b 0.0.0.0:8000 app:app
+
 
 2. The server will start on `http://127.0.0.1:5000/`.
 
