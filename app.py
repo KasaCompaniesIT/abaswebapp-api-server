@@ -76,7 +76,6 @@ def payroll_import():
                 csv_writer.writerow([
                     abas_id,
                     entry.get('date', ''),
-                    entry.get('operation', ''),
                     entry.get('paychexCode', ''),
                     entry.get('hours', 0)
                 ])
