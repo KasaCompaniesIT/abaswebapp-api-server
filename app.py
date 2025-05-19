@@ -22,7 +22,7 @@ def jobtime_entry():
     hours_worked = data['HoursWorked']
 
     # Generate a unique file name using a timestamp
-    timestamp = datetime.now().strftime('%Y%m%d%H%M%S')  # Format: YYYYMMDDHHMMSS
+    timestamp = datetime.now().strftime('%Y%m%d%H%M%S%f')  # Format: YYYYMMDDHHMMSS
     unique_file_name = f"jobtime_{abas_id}_{timestamp}.csv"
 
     # Define the network location for the CSV file
