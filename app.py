@@ -69,7 +69,7 @@ def payroll_import():
             csv_writer = csv.writer(csv_file)
 
             # Write the header row
-            csv_writer.writerow(['Abas ID', 'Date', 'Operation', 'Paychex Code', 'Hours'])
+            csv_writer.writerow(['Abas ID', 'Date', 'Paychex Code', 'Hours'])
 
             # Write each row of data
             for entry in time_entries:
