@@ -78,7 +78,7 @@ def payroll_import():
                     entry.get('date', ''),
                     entry.get('paychexCode', ''),
                     entry.get('hours', 0),
-                    entry.get('comments', '')
+                    entry.get('comments', 'null')
                 ])
 
         # Return a success response
