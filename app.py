@@ -6,8 +6,8 @@ from datetime import datetime
 app = Flask(__name__)
 
 # Define the directory for saving CSV files
-JOBTIME_CSV_DIR = '/u/abas/kesdemo/win/LABOR_IMPORT/'
-PAYROLL_CSV_DIR = '/u/abas/kesdemo/win/PAYROLL_IMPORT/'
+JOBTIME_CSV_DIR = '/u/abas/keserp/win/LABOR_IMPORT/'
+PAYROLL_CSV_DIR = '/u/abas/kesepr/win/PAYROLL_IMPORT/'
 
 @app.route('/jobtime_entry', methods=['POST'])
 def jobtime_entry():
@@ -35,7 +35,12 @@ def jobtime_entry():
             # Write the header
             csv_writer.writerow(['AbasID', 'Date', 'WorkSlipID', 'HoursWorked'])
             # Write the entry
-            csv_writer.writerow([abas_id, selected_date, work_slip_id, hours_worked])
+            csv_writer.writerow([
+                abas_id,
+                selected_date,
+                work_slip_id,
+                f"{float(hours_worked):.2f}"  # Limit to 2 decimal places
+            ])
             
         # Return a success response
         return jsonify({'success': True, 'message': 'Data successfully imported.'}), 200
@@ -77,7 +82,7 @@ def payroll_import():
                     abas_id,
                     entry.get('date', ''),
                     entry.get('paychexCode', ''),
-                    entry.get('hours', 0),
+                    f"{float(entry.get('hours', 0)):.2f}",  # Limit to 2 decimal places
                     entry.get('comments', '')
                 ])
 
