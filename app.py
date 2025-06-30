@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # Define the directory for saving CSV files
 JOBTIME_CSV_DIR = '/u/abas/keserp/win/LABOR_IMPORT/'
-PAYROLL_CSV_DIR = '/u/abas/kesepr/win/PAYROLL_IMPORT/'
+PAYROLL_CSV_DIR = '/u/abas/keserp/win/PAYROLL_IMPORT/'
 
 @app.route('/jobtime_entry', methods=['POST'])
 def jobtime_entry():
