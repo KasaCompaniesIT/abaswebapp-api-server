@@ -122,13 +122,13 @@ def add_comments():
             csv_writer.writerow(['Abas ID', 'Date', 'Paychex Code', 'Hours', 'Comment'])
 
             # Write comments for the specified date
-            csv_writer.writerow(
+            csv_writer.writerow([
                 abas_id,
                 cDate,
                 "",
                 "",
                 comments
-            )
+            ])
 
         # Return a success response
         return jsonify({'success': True, 'message': 'Data successfully imported.'}), 200
