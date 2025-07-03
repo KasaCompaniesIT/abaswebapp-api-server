@@ -39,7 +39,7 @@ def jobtime_entry():
                 abas_id,
                 selected_date,
                 work_slip_id,
-                f"{float(hours_worked):.2f}"  # Limit to 2 decimal places
+                "0" if float(hours_worked) == 0 else f"{float(hours_worked):.2f}"
             ])
             
         # Return a success response
