@@ -101,10 +101,11 @@ def add_comments():
 
         # Extract abas_id, total_hours, and time_entries
         abas_id = data.get('abas_id')
-        time_entries = data.get('time_entries')
+        cDate = data.get('date')
+        comments = data.get('comments')
 
         # Validate the data
-        if not abas_id or not time_entries or not isinstance(time_entries, list):
+        if not abas_id or not cDate or not comments:
             return jsonify({'success': False, 'error': 'Invalid data format.'}), 400
 
         # Generate a unique file name using a timestamp
@@ -120,15 +121,14 @@ def add_comments():
             # Write the header row
             csv_writer.writerow(['Abas ID', 'Date', 'Paychex Code', 'Hours', 'Comment'])
 
-            # Write each row of data
-            for entry in time_entries:
-                csv_writer.writerow([
-                    abas_id,
-                    entry.get('date', ''),
-                    "",
-                    "",
-                    entry.get('comments', '')
-                ])
+            # Write comments for the specified date
+            csv_writer.writerow(
+                abas_id,
+                cDate,
+                "",
+                "",
+                comments
+            )
 
         # Return a success response
         return jsonify({'success': True, 'message': 'Data successfully imported.'}), 200
