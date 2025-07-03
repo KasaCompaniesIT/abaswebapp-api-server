@@ -92,6 +92,50 @@ def payroll_import():
     except Exception as e:
         # Handle any errors
         return jsonify({'success': False, 'error': str(e)}), 500
+    
+@app.route('/add_comments', methods=['POST'])
+def add_comments():
+    try:
+        # Get the JSON data from the request
+        data = request.get_json()
+
+        # Extract abas_id, total_hours, and time_entries
+        abas_id = data.get('abas_id')
+        time_entries = data.get('time_entries')
+
+        # Validate the data
+        if not abas_id or not time_entries or not isinstance(time_entries, list):
+            return jsonify({'success': False, 'error': 'Invalid data format.'}), 400
+
+        # Generate a unique file name using a timestamp
+        timestamp = datetime.now().strftime('%Y%m%d')  # Format: YYYYMMDDHHMMSS
+    
+        # Define the CSV file path
+        csv_file_path = os.path.join(PAYROLL_CSV_DIR, f'comments_{abas_id}_{timestamp}.csv')
+
+        # Write the data to the CSV file
+        with open(csv_file_path, mode='w', newline='', encoding='utf-8') as csv_file:
+            csv_writer = csv.writer(csv_file)
+
+            # Write the header row
+            csv_writer.writerow(['Abas ID', 'Date', 'Paychex Code', 'Hours', 'Comment'])
+
+            # Write each row of data
+            for entry in time_entries:
+                csv_writer.writerow([
+                    abas_id,
+                    entry.get('date', ''),
+                    "",
+                    "",
+                    entry.get('comments', '')
+                ])
+
+        # Return a success response
+        return jsonify({'success': True, 'message': 'Data successfully imported.'}), 200
+
+    except Exception as e:
+        # Handle any errors
+        return jsonify({'success': False, 'error': str(e)}), 500
 
 
 if __name__ == '__main__':
